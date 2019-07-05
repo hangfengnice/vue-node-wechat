@@ -7,15 +7,68 @@
       <div class="title">注册账户</div>
       <div class="content">
         <!-- 表单 -->
+        <form action>
+          <InputGroup label="昵称" placeholder="例如: 周周" v-model="user.name" />
+          <InputGroup label="邮箱" placeholder="请填写邮箱" v-model="user.email" />
+          <InputGroup label="密码" type="password" placeholder="请填写密码" v-model="user.password" />
+
+          <InputGroup label="确认密码" type="password" placeholder="请确认密码" v-model="user.password2" />
+        </form>
+        <div class="btn_wrap">
+          <Ybutton :disabled="isDisabled" @click="registerClick">注册</Ybutton>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import InputGroup from "../components/inputGroup";
+import Ybutton from "../components/YButton";
+
 export default {
   name: "register",
-  components: {}
+  data() {
+    return {
+      user: {
+        name: "",
+        eamil: "",
+        password: "",
+        password2: ""
+      }
+    };
+  },
+  components: {
+    InputGroup,
+    Ybutton
+  },
+  computed: {
+    isDisabled() {
+      if (
+        this.user.name &&
+        this.user.email &&
+        this.user.password &&
+        this.user.password2
+      )
+        return false;
+      else return true;
+    }
+  },
+  methods: {
+    registerClick() {
+      // 验证
+      var reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+      if (!reg.test(this.user.email)) {
+        console.log("请输入正确的邮箱 @ @");
+        return;
+      }
+
+      if (this.user.password !== this.user.password2) {
+        console.log("两次密码不一致");
+        return;
+      }
+    }
+  }
 };
 </script>
 
@@ -44,10 +97,13 @@ export default {
   padding: 16px;
   box-sizing: border-box;
 }
-.title{
+.title {
   margin-top: 30px;
   font-size: 22px;
   text-align: center;
-  
+}
+.content,
+.btn_wrap {
+  margin-top: 30px;
 }
 </style>
