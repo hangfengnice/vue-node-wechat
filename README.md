@@ -3,7 +3,7 @@
 ## 项目启动
 
 ```javascript
-git clone git@github.com:hangfengnice/vue-node-manage.git
+git clone git@github.com:hangfengnice/vue-node-wechat.git
 
 npm i  // 安装服务端依赖包
 
