@@ -67,6 +67,12 @@ export default {
         console.log("两次密码不一致");
         return;
       }
+
+      this.$axios.post('/api/register', this.user)
+      .then(res => {
+        console.log('success')
+        this.$router.push('/login')
+      })
     }
   }
 };

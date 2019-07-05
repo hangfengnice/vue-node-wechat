@@ -1,14 +1,13 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Index from './views/index.vue'
-import Login from './views/login.vue'
-import Register from './views/register.vue'
+import Vue from "vue";
+import Router from "vue-router";
+import Index from "./views/index.vue";
+import Login from "./views/login.vue";
+import Register from "./views/register.vue";
 
+Vue.use(Router);
 
-Vue.use(Router)
-
-export default new Router({
-  mode: 'history',
+const router = new Router({
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
@@ -27,4 +26,12 @@ export default new Router({
       component: Register
     }
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  const isLogin = localStorage.wxToken ? true : false;
+  if (to.path == "/login" || to.path == "/register") next();
+  else isLogin ? next() : next("/login");
+});
+
+export default router;

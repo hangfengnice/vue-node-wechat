@@ -27,14 +27,11 @@ router.post("/register", (req, res) => {
         email: req.body.email,
         avatar,
         password: req.body.password,
-        identity: req.body.identity
       });
-      console.log(req.body.password);
       bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(newUser.password, salt, function(err, hash) {
           // Store hash in your password DB.
           if (err) throw err;
-          console.log(hash);
           newUser.password = hash;
           newUser
             .save()
@@ -49,6 +46,7 @@ router.post("/register", (req, res) => {
 router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
+  console.log(req.body)
   User.findOne({ email }).then(user => {
     if (!user) {
       return res.status(404).json("邮箱不存在");
@@ -59,7 +57,6 @@ router.post("/login", (req, res) => {
           id: user.id,
           name: user.name,
           avatar: user.avatar,
-          identity: user.identity
         };
         jwt.sign(rule, "secret", { expiresIn: 3600 }, (err, token) => {
           if (err) {
@@ -85,7 +82,6 @@ router.get(
       id: req.user.id,
       name: req.user.name,
       email: req.user.email,
-      identity: req.user.identity
     });
   }
 );

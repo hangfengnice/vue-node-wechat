@@ -50,6 +50,16 @@ export default {
         console.log("请输入正确的邮箱 @ @");
         return;
       }
+
+      // 实现登录
+      this.$axios.post("/api/login", this.user).then(res => {
+        const { token } = res.data;
+
+        // 存储 本地 localStorage
+        localStorage.setItem("wxToken", token);
+
+        this.$router.push("/");
+      });
     }
   }
 };
