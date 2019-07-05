@@ -21,6 +21,7 @@
 <script>
 import InputGroup from "../components/inputGroup";
 import Ybutton from "../components/YButton";
+import jwt_decode from 'jwt-decode'
 
 export default {
   name: "login",
@@ -57,6 +58,10 @@ export default {
 
         // 存储 本地 localStorage
         localStorage.setItem("wxToken", token);
+
+        const decode = jwt_decode(token)
+        console.log(decode)
+        this.$store.dispatch('setUser', decode)
 
         this.$router.push("/");
       });
