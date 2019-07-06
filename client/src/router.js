@@ -13,7 +13,33 @@ const router = new Router({
     {
       path: "/",
       name: "index",
-      component: Index
+      component: Index,
+      children: [
+        {
+path: "",
+component: () => import('./views/chats.vue')
+        },
+        {
+          path: "/chats",
+          name: "chats",
+          component: () => import("./views/chats.vue")
+        },
+        {
+          path: "/me",
+          name: "me",
+          component: () => import("./views/me.vue")
+        },
+        {
+          path: "/discover",
+          name: "discover",
+          component: () => import("./views/discover.vue")
+        },
+        {
+          path: "/contact",
+          name: "contact",
+          component: () => import("./views/contact.vue")
+        }
+      ]
     },
     {
       path: "/login",
