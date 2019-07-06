@@ -1,4 +1,4 @@
-# vue-node-manage
+# vue-node-wechat
 
 ## 项目启动
 
@@ -26,7 +26,7 @@ client package.json //客户端
     "start": "npm run serve"
   }
 
-vue-node-manage package.json // 服务端
+vue-node-wechat package.json // 服务端
 "scripts": {
     "client-install": "npm install --prefix client",  // 客户端
     "client": "npm start --prefix client",            // 客户端
