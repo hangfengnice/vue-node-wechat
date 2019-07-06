@@ -11,6 +11,9 @@
             </div>
           </div>
         </div>
+        <div class="content_wrapper">
+          <CellView v-for='(moment, index) of momentList' :key='index' :momentObj='moment'></CellView>
+        </div>
       </div>
     </div>
   </div>
@@ -19,6 +22,7 @@
 <script>
 import Header from "../components/top";
 import jwt_decode from "jwt-decode";
+import CellView from "../components/cellView";
 
 export default {
   name: "moments",
@@ -45,7 +49,8 @@ export default {
     }
   },
   components: {
-    Header
+    Header,
+    CellView
   }
 };
 </script>
