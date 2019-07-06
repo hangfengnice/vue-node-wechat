@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Index from "./views/index.vue";
 import Login from "./views/login.vue";
 import Register from "./views/register.vue";
+import Moments from './views/moments.vue'
 
 Vue.use(Router);
 
@@ -50,6 +51,11 @@ component: () => import('./views/chats.vue')
       path: "/register",
       name: "register",
       component: Register
+    },
+    {
+      path: "/moments",
+      name: "moments",
+      component: Moments
     }
   ]
 });

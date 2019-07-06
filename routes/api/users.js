@@ -46,7 +46,6 @@ router.post("/register", (req, res) => {
 router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  console.log(req.body)
   User.findOne({ email }).then(user => {
     if (!user) {
       return res.status(404).json("邮箱不存在");

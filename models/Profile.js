@@ -2,26 +2,25 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ProfileSchema = new Schema({
-  type: {
-    type: String
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "users"
   },
-  describe: {
-    type: String
-  },
-  income: {
+  img: {
     type: String,
     required: true
   },
-  expend: {
+  name: {
     type: String,
     required: true
   },
-  cash: {
+  text: {
     type: String,
     required: true
   },
-  remark: {
-    type: String
+  imgs: {
+    type: [String],
+    required: true
   },
   date: {
     type: Date,
