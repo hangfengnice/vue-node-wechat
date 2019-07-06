@@ -17,8 +17,8 @@ const router = new Router({
       component: Index,
       children: [
         {
-path: "",
-component: () => import('./views/chats.vue')
+          path: "",
+          component: () => import("./views/chats.vue")
         },
         {
           path: "/chats",
