@@ -1,15 +1,29 @@
 <template>
   <div class="scroll-wrap" ref="wrapper">
-    <!-- 下拉刷新 -->
-    <div class="pulldown" v-show="dragTip.showLoading">
-      <div class="clear">
-        <div class="fl">
-          <img width="16" src="../assets/scroll_load.gif" />
+    <div>
+      <!-- 下拉刷新 -->
+      <div class="pulldown" v-show="dragTip.showLoading">
+        <div class="clear">
+          <div class="fl">
+            <img width="16" src="../assets/scroll_load.gif" />
+          </div>
+          <div class="fl">{{dragTip.text}}</div>
         </div>
-        <div class="fl">{{dragTip.text}}</div>
+      </div>
+      <slot></slot>
+
+      <div class="pullup" v-show="dragTip.showLoading">
+        <div class="clear" v-if="!isDone">
+          <div class="fl">
+            <img width="16" src="../assets/scroll_load.gif" />
+          </div>
+          <div class="fl">{{dragTip.text}}</div>
+        </div>
+        <div class="list-donetip" v-else>
+          <slot name="doneTip">没有更多数据</slot>
+        </div>
       </div>
     </div>
-    <slot></slot>
   </div>
 </template>
 
@@ -24,7 +38,8 @@ export default {
       dragTip: {
         text: "下拉刷新",
         showLoading: false
-      }
+      },
+      isDone: false
     };
   },
   mounted() {
@@ -39,20 +54,30 @@ export default {
       }
 
       this.scroll = new BScroll(this.$refs.wrapper, {
-        pullUpLoad: 1
+        probeType: 1,
+        startY: 0,
+        scrollY: true,
+
       });
 
       this.scroll.on("scroll", pos => {
-        this.dragTip.showLoading = true;
+        console.log(pos)
+        // this.dragTip.showLoading = true;
       });
 
-      this.scroll.on("touchEnd", pos => {
-        // 注册下啦事件
-        this.$emit("pulldown");
-        this.$on("refresh", this.reset);
-      });
+      // this.scroll.on("touchEnd", pos => {
+      //   // 注册下啦事件
+      //   this.$emit("pulldown");
+      //   this.$on("refresh", this.reset);
+      // });
+
+      // this.scroll.on("scrollEnd", pos => {
+      //   // this.$emit("pullup");
+      //   console.log(1)
+      // });
     },
     reset() {
+      this.isDone = false;
       setTimeout(() => {
         this.dragTip = {
           text: "下拉刷新",

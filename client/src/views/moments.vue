@@ -2,7 +2,7 @@
   <div class="circle">
     <Header title="朋友圈" btn_icon="camera" :isLeft="true"></Header>
     <div class="container">
-      <Scroll ref="refresh" @pulldown="loadData">
+      <Scroll ref="refresh" @pulldown="loadData" @pullup='loadMoreData'>
         <div class="head_wrapper">
           <div class="user_head">
             <span>{{user.name}}</span>
@@ -29,7 +29,9 @@ export default {
   name: "moments",
   data() {
     return {
-      momentList: []
+      momentList: [],
+      page: 2,
+      size: 3
     };
   },
   computed: {
@@ -51,6 +53,20 @@ export default {
     },
     loadData() {
       this.getLatestData();
+    },
+    loadMoreData(){
+       this.$axios.get(`/api/profile/${this.page}/${this.size}`).then(res => {
+        // console.log(res.data)
+        const result = [...res.data]
+
+        if(result.length > 0){
+          result.forEach(item => {
+            this.momentList.push(item)
+          })
+        }
+
+        this.page ++ 
+      });
     }
   },
   components: {
