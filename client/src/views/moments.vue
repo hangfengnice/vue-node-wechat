@@ -2,7 +2,7 @@
   <div class="circle">
     <Header title="朋友圈" btn_icon="camera" :isLeft="true"></Header>
     <div class="container">
-      <div class="scroll-wrap">
+      <Scroll ref="refresh" @pulldown="loadData">
         <div class="head_wrapper">
           <div class="user_head">
             <span>{{user.name}}</span>
@@ -12,9 +12,9 @@
           </div>
         </div>
         <div class="content_wrapper">
-          <CellView v-for='(moment, index) of momentList' :key='index' :momentObj='moment'></CellView>
+          <CellView v-for="(moment, index) of momentList" :key="index" :momentObj="moment"></CellView>
         </div>
-      </div>
+      </Scroll>
     </div>
   </div>
 </template>
@@ -23,6 +23,7 @@
 import Header from "../components/top";
 import jwt_decode from "jwt-decode";
 import CellView from "../components/cellView";
+import Scroll from "../components/scroll";
 
 export default {
   name: "moments",
@@ -45,12 +46,17 @@ export default {
     getLatestData() {
       this.$axios.get("/api/profile/latest").then(res => {
         this.momentList = [...res.data];
+        this.$refs.refresh.$emit("refresh");
       });
+    },
+    loadData() {
+      this.getLatestData();
     }
   },
   components: {
     Header,
-    CellView
+    CellView,
+    Scroll
   }
 };
 </script>
