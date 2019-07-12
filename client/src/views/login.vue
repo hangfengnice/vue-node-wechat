@@ -60,7 +60,7 @@ export default {
         localStorage.setItem("wxToken", token);
 
         const decode = jwt_decode(token)
-        console.log(decode)
+        // console.log(decode)
         this.$store.dispatch('setUser', decode)
 
         this.$router.push("/");

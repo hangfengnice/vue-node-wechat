@@ -16,7 +16,7 @@ const ProfileSchema = new Schema({
   },
   text: {
     type: String,
-    required: true
+    // required: true
   },
   imgs: {
     type: [String],

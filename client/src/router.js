@@ -4,6 +4,7 @@ import Index from "./views/index.vue";
 import Login from "./views/login.vue";
 import Register from "./views/register.vue";
 import Moments from './views/moments.vue'
+import Publish from './views/publish.vue'
 
 Vue.use(Router);
 
@@ -56,6 +57,11 @@ const router = new Router({
       path: "/moments",
       name: "moments",
       component: Moments
+    },
+    {
+      path: "/publish",
+      name: "publish",
+      component: Publish
     }
   ]
 });

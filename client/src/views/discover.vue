@@ -32,13 +32,13 @@ export default {
 <style lang='scss' scoped>
 .find {
   width: 100%;
-  height: calc(100% - 55px);
+  height: calc(100% - 105px);
   position: relative;
   box-sizing: border-box;
 }
 .content {
   width: 100%;
-  height: calc(100% - 50px);
+  height: 100%;
   margin-top: 50px;
 }
 </style>

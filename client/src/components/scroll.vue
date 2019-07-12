@@ -54,27 +54,40 @@ export default {
       }
 
       this.scroll = new BScroll(this.$refs.wrapper, {
-        probeType: 1,
-        startY: 0,
-        scrollY: true,
-
+        probeType: 1
       });
 
       this.scroll.on("scroll", pos => {
-        console.log(pos)
-        // this.dragTip.showLoading = true;
+        // console.log(pos)
+        this.dragTip.showLoading = true;
+        if (pos.y > 50) {
+          console.log(1);
+          this.dragTip.text = "释放刷新";
+        }
       });
 
-      // this.scroll.on("touchEnd", pos => {
-      //   // 注册下啦事件
-      //   this.$emit("pulldown");
-      //   this.$on("refresh", this.reset);
-      // });
+      this.scroll.on("touchEnd", pos => {
+        // 注册下啦事件
+        if (pos.y > 50) {
+          this.dragTip.text = "刷新中...";
+          // 重新
+          this.$emit("pulldown");
+          this.$on("refresh", this.reset);
+        }
+      });
 
-      // this.scroll.on("scrollEnd", pos => {
-      //   // this.$emit("pullup");
-      //   console.log(1)
-      // });
+      this.scroll.on("scrollEnd", pos => {
+        // console.log(this.scroll.maxScrollY)
+        if (this.scroll.y == this.scroll.maxScrollY) {
+          //  console.log(2)
+          //  console.log(this.scroll.y)
+          this.$emit("pullup");
+          // 
+          this.$on('loadDone', () => {
+            this.isDone = true
+          })
+        }
+      });
     },
     reset() {
       this.isDone = false;
@@ -83,7 +96,7 @@ export default {
           text: "下拉刷新",
           showLoading: false
         };
-      }, 600);
+      }, 500);
     }
   }
 };

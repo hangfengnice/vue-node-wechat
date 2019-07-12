@@ -45,6 +45,9 @@ export default {
   name: "tabbar",
   props: {
     data: Array
+  },
+  created(){
+    // console.log(this.data)
   }
 };
 </script>

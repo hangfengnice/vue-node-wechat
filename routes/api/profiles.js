@@ -13,6 +13,7 @@ router.post(
   "/add",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log(req.body)
     const profileFields = {};
     if (req.body.img) profileFields.img = req.body.img;
     if (req.body.name) profileFields.name = req.body.name;

@@ -1,8 +1,8 @@
 <template>
   <div class="circle">
-    <Header title="朋友圈" btn_icon="camera" :isLeft="true"></Header>
+    <Header title="朋友圈" btn_icon="camera" :isLeft="true" @rightClick="$router.push('/publish')"></Header>
     <div class="container">
-      <Scroll ref="refresh" @pulldown="loadData" @pullup='loadMoreData'>
+      <Scroll ref="refresh" @pulldown="loadData" @pullup="loadMoreData">
         <div class="head_wrapper">
           <div class="user_head">
             <span>{{user.name}}</span>
@@ -52,20 +52,22 @@ export default {
       });
     },
     loadData() {
+      this.page = 2;
       this.getLatestData();
     },
-    loadMoreData(){
-       this.$axios.get(`/api/profile/${this.page}/${this.size}`).then(res => {
+    loadMoreData() {
+      this.$axios.get(`/api/profile/${this.page}/${this.size}`).then(res => {
         // console.log(res.data)
-        const result = [...res.data]
+        const result = [...res.data];
 
-        if(result.length > 0){
+        if (result.length > 0) {
           result.forEach(item => {
-            this.momentList.push(item)
-          })
+            this.momentList.push(item);
+          });
+          this.page++;
+        } else {
+          this.$refs.refresh.$emit("loadDone");
         }
-
-        this.page ++ 
       });
     }
   },
