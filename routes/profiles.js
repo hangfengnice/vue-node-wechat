@@ -1,7 +1,7 @@
 // @login & register
 const express = require("express");
 const router = express.Router();
-const Profile = require("../../models/Profile");
+const Profile = require("../models/Profile");
 const passport = require("passport");
 
 router.get("/test", (req, res) => {

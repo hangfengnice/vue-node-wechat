@@ -2,8 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
-const users = require("./routes/api/users");
-const profiles = require("./routes/api/profiles");
+const users = require("./routes/users");
+const profiles = require("./routes/profiles");
+const chat = require('./routes/chat')
 
 const passport = require("passport");
 
@@ -25,6 +26,8 @@ require("./config/passport")(passport);
 
 app.use(users);
 app.use("/profile", profiles);
+app.use("/chat", chat);
+
 
 // app.get('/',(req,res) => {
 //   res.send('hello hangfeng')
