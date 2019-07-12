@@ -61,7 +61,7 @@ export default {
         // console.log(pos)
         this.dragTip.showLoading = true;
         if (pos.y > 50) {
-          console.log(1);
+          // console.log(1);
           this.dragTip.text = "释放刷新";
         }
       });

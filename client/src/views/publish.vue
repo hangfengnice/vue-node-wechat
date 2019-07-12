@@ -8,22 +8,25 @@
       <div class="text_wrap">
         <textarea placeholder="有什么想说的吗 @ @ ..." v-model='text'></textarea>
         <!-- 文件上传 -->
-        <UpLoad @getImgs="getImgs"></UpLoad>
+        <UpLoad :loading='loading' @getImgs="getImgs"></UpLoad>
       </div>
     </div>
+    <Loading :loading='loading' />
   </div>
 </template>
 
 <script>
 import jwt_decode from "jwt-decode";
 import UpLoad from "../components/upLoad";
+import Loading from '../components/loading'
 
 export default {
   name: "publish",
   data() {
     return {
       text: "",
-      imgs: []
+      imgs: [],
+      loading: false
     };
   },
   computed: {
@@ -35,11 +38,13 @@ export default {
     }
   },
   components: {
-    UpLoad
+    UpLoad,
+    Loading
   },
   methods: {
     publish() {
-      console.log(this.imgs)
+      this.loading = true
+      // console.log(this.imgs)
       const postData = {
         name: this.user.name,
         img: this.user.avatar,
@@ -50,6 +55,7 @@ export default {
       this.$axios
         .post("/api/profile/add", postData)
         .then(res => {
+          this.loading = false
           this.$router.push("/moments");
         })
         .catch(err => {});

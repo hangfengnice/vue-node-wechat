@@ -2,7 +2,7 @@
   <div class="img_wrap">
     <div class="isImg" v-for="(file_img,index) in showFileData" :key="index">
       <img :src="file_img" alt />
-      <button class="remove" @click="removeClick(file_img)">x</button>
+      <button v-show='!loading' class="remove" @click="removeClick(file_img)">x</button>
     </div>
     <div class="isImg img_upload" v-if="showFileData.length < 9">
       <button class="btn_upload">
@@ -20,6 +20,12 @@ export default {
       showFileData: [], // 存放图片
       allUploadFiles: []
     };
+  },
+  props: {
+    loading: {
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
     addFile() {

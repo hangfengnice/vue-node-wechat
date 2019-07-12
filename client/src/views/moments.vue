@@ -31,7 +31,8 @@ export default {
     return {
       momentList: [],
       page: 2,
-      size: 3
+      size: 3,
+      loading: false
     };
   },
   computed: {
@@ -46,7 +47,12 @@ export default {
   },
   methods: {
     getLatestData() {
+      if(this.loading){
+        return
+      }
+      this.loading = true
       this.$axios.get("/api/profile/latest").then(res => {
+        this.loading = false
         this.momentList = [...res.data];
         this.$refs.refresh.$emit("refresh");
       });
@@ -56,8 +62,13 @@ export default {
       this.getLatestData();
     },
     loadMoreData() {
+      if (this.loading) {
+        return;
+      }
+      this.loading = true;
       this.$axios.get(`/api/profile/${this.page}/${this.size}`).then(res => {
         // console.log(res.data)
+        this.loading = false;
         const result = [...res.data];
 
         if (result.length > 0) {

@@ -7,7 +7,7 @@
       <div class="cell_name">{{momentObj.name}}</div>
       <div class="cell_text" v-if="momentObj.text">{{momentObj.text}}</div>
       <div class="cell_img" v-if="momentObj.imgs.length > 0">
-        <img v-for="(item, index) of momentObj.imgs" :key="index" src alt />
+        <img v-for="(item, index) of momentObj.imgs" :key="index" :src='item' alt />
       </div>
     </div>
   </div>
@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style scoped>
-.cell_crilce {
+.cell_circle {
   width: 100%;
   box-sizing: border-box;
   padding: 16px;

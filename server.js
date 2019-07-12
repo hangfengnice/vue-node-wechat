@@ -8,14 +8,16 @@ const profiles = require("./routes/api/profiles");
 const passport = require("passport");
 
 mongoose
-  .connect("mongodb://localhost:27017/vue-node-wechat", { useNewUrlParser: true })
+  .connect("mongodb://localhost:27017/vue-node-wechat", {
+    useNewUrlParser: true
+  })
   .then(() => {
     console.log("ok");
   });
 
 const port = 5000;
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
+app.use(bodyParser.json({ limit: "50mb" }));
 
 // passport 初始化
 app.use(passport.initialize());

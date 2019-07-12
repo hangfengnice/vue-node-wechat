@@ -2,7 +2,7 @@
   <div class="header">
     <div class="header-button is-left" v-show="isLeft">
       <i class="fa fa-chevron-left"></i>
-      <button @click="$router.go(-1)">返回</button>
+      <button @click="$router.push('/discover')">返回</button>
     </div>
     <h1 class="header-title">{{title}}</h1>
     <div class="header-button is-right" v-show="btn_icon">
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style scoped>
-.header{
+.header {
   align-items: center;
   background-color: #272626;
   box-sizing: border-box;
@@ -46,7 +46,7 @@ export default {
   top: 0;
   z-index: 99;
 }
-.header-button button{
+.header-button button {
   background-color: transparent;
   border: 0;
   box-shadow: none;
@@ -56,14 +56,13 @@ export default {
   font-size: inherit;
   outline: none;
 }
-.header-title{
+.header-title {
   flex: 1;
 }
-.is-left{
+.is-left {
   text-align: left;
 }
-.is-right{
+.is-right {
   text-align: right;
 }
-
 </style>
