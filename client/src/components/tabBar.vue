@@ -1,7 +1,7 @@
 <template>
   <div class="tabbar">
     <router-link v-for="(item, index) of data" :key="index" :to="item.path" 
-    active-class='is-selected'
+
     class="tab-item">
       <div class="tab-item-icon">
         <i :class='"fa fa-"+item.icon'></i>
@@ -88,7 +88,7 @@ a {
   text-decoration: none;
   color: #888;
 }
-.is-selected{
+.router-link-active{
   color: #20af0e;
 }
 </style>

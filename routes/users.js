@@ -73,6 +73,72 @@ router.post("/login", (req, res) => {
   });
 });
 
+/**
+ * router  GET api/users/all
+ * desc    获取所有联系人的信息
+ * access  Private
+ */
+router.get(
+  '/all',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const errors = {};
+    User.find()
+      .then(users => {
+        if (!users) {
+          errors.noprofile = '没有任何用户信息';
+          return res.status(404).json(errors);
+        }
+        const newUsers = [];
+        for (let i = 0; i < users.length; i++) {
+          let usersObj = {};
+          usersObj = {
+            name: users[i].name,
+            _id: users[i]._id,
+            email: users[i].email,
+            avatar: users[i].avatar,
+            date: users[i].date
+          };
+          newUsers.push(usersObj);
+        }
+
+        res.json(newUsers);
+      })
+      .catch(err => res.status(404).json({ users: '没有任何用户信息' }));
+  }
+);
+
+/**
+ * router  GET api/users/:user_id
+ * desc    通过user_id获取个人信息
+ * access  Private
+ */
+router.get(
+  '/:user_id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const errors = {};
+    User.findOne({ _id: req.params.user_id })
+      .populate('user', ['name', 'avatar'])
+      .then(user => {
+        if (!user) {
+          errors.nouser = '未找到该用户信息';
+          res.status(404).json(errors);
+        }
+        let usersObj = {};
+        usersObj = {
+          name: user.name,
+          _id: user._id,
+          email: user.email,
+          avatar: user.avatar,
+          date: user.date
+        };
+        res.json(usersObj);
+      })
+      .catch(err => res.status(404).json(err));
+  }
+);
+
 router.get(
   "/current",
   passport.authenticate("jwt", { session: false }),

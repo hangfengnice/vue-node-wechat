@@ -11,7 +11,26 @@ export default {
   name: "contact",
   components: {
     Top
+  },
+  data(){
+    return {
+      friendsList: []
+
+    }
+  },
+  created(){
+this.getFriendsList()
+  },
+  methods: {
+    getFriendsList(){
+      this.$axios.get('/api/all')
+      .then(res => {
+        // console.log(res.data)
+        this.getFriendsList = res.data
+      })
+    }
   }
+
 };
 </script>
 

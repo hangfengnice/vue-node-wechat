@@ -3,8 +3,8 @@ import Router from "vue-router";
 import Index from "./views/index.vue";
 import Login from "./views/login.vue";
 import Register from "./views/register.vue";
-import Moments from './views/moments.vue'
-import Publish from './views/publish.vue'
+import Moments from "./views/moments.vue";
+import Publish from "./views/publish.vue";
 
 Vue.use(Router);
 
@@ -15,12 +15,9 @@ const router = new Router({
     {
       path: "/",
       name: "index",
+      redirect: "/chats",
       component: Index,
       children: [
-        {
-          path: "",
-          component: () => import("./views/chats.vue")
-        },
         {
           path: "/chats",
           name: "chats",

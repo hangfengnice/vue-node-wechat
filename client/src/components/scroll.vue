@@ -78,7 +78,7 @@ export default {
 
       this.scroll.on("scrollEnd", pos => {
         // console.log(this.scroll.maxScrollY)
-        if (this.scroll.y == this.scroll.maxScrollY) {
+        if (this.scroll.y == this.scroll.maxScrollY + 30) {
           //  console.log(2)
           //  console.log(this.scroll.y)
           this.$emit("pullup");

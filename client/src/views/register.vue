@@ -19,6 +19,11 @@
         </div>
       </div>
     </div>
+
+    <div class="footer_wrap">
+      |
+      <button class="login" @click="$router.push('/login')">前往登录页面</button>|
+    </div>
   </div>
 </template>
 
@@ -111,5 +116,20 @@ export default {
 .content,
 .btn_wrap {
   margin-top: 30px;
+}
+.footer_wrap {
+  position: absolute;
+  left: 0;
+  bottom: 16px;
+  text-align: center;
+  width: 100%;
+  color: #888;
+  .login {
+    font-size: 16px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: #7b8ca9;
+  }
 }
 </style>
