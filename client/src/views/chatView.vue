@@ -2,8 +2,19 @@
   <div class="chat">
     <Header btn_icon="ellipsis-h" v-if="targetUser" :is-left="true" :title="targetUser.name" />
 
-    <div class="container">
+    <div class="container" v-if="targetUser && user">
       <!-- 聊天内容 -->
+      <div class="content_wrap" v-for="(item, index) of messageList" :key="index">
+        <!-- other -->
+        <div class="left_msg" v-if="item.source == 'other'">
+          <img :src="targetUser.avatar" alt />
+          <span>{{item.msg}}</span>
+        </div>
+        <div class="right_msg" v-if="item.source == 'self'">
+          <span>{{item.msg}}</span>
+          <img :src="user.avatar" alt />
+        </div>
+      </div>
     </div>
 
     <div class="footer_wrap">
@@ -38,7 +49,7 @@ export default {
         current: this.user.id,
         msg: this.msgValue
       };
-      console.log(msgObj)
+      // console.log(msgObj);
       WSocket.send(msgObj);
 
       // 本地客户端显示
@@ -47,7 +58,7 @@ export default {
         source: "self"
       });
       // 保存消息
-        this.saveMsg()
+      this.saveMsg();
 
       // 清空 input
       this.msgValue = "";
@@ -63,13 +74,14 @@ export default {
         message: this.messageList,
         user_id: this.user.id
       };
-      this.$axios.post(`/api/chat/addmsg/${this.user.id}`).then(
-        res => (this.msgValue = "")
-      );
+      console.log(message);
+      this.$axios
+        .post(`/api/chat/addmsg`, message)
+        .then(res => (this.msgValue = ""));
     },
     getMessage() {
       this.$axios(`/api/chat/msg/${this.user.id}`).then(res => {
-        // console.log(res.data);
+        console.log(res.data);
         // console.log(res.data);
         // 过滤与当前目标对象的聊天数据
         let result = res.data.filter(data => {
@@ -108,7 +120,7 @@ export default {
   beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.targetUser = to.params.user;
-      console.log(to.params.user)
+      console.log(to.params.user);
       vm.getMessage();
     });
   }
