@@ -21,23 +21,22 @@ export default {
   background-color: #fff;
   box-sizing: border-box;
   color: inherit;
-  min-height: 80px;
+  min-height: 50px;
   display: flex;
   font-size: 16px;
   line-height: 1;
   padding: 0 8px;
   overflow: hidden;
   width: 100%;
-  line-height: 80px;
-  border-top: 1px solid #d9d9d9;
+  line-height: 50px;
   border-bottom: 1px solid #d9d9d9;
 }
 .cell-title {
   flex: 1;
 }
 .cell-title img {
-  width: 4rem;
-  height: 4rem;
+  width: 2.5rem;
+  height: 2.5rem;
   vertical-align: middle;
   margin-right: 0.6rem;
 }
