@@ -6,6 +6,7 @@ import Register from "./views/register.vue";
 import Moments from "./views/moments.vue";
 import Publish from "./views/publish.vue";
 import Information from './views/information.vue'
+import Chat from './views/chatView.vue'
 
 Vue.use(Router);
 
@@ -65,6 +66,11 @@ const router = new Router({
       path: "/information",
       name: "information",
       component: Information
+    },
+    {
+      path: "/chat",
+      name: "chat",
+      component: Chat
     }
   ]
 });

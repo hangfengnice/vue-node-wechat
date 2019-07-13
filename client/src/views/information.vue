@@ -3,6 +3,9 @@
     <Header title="详细资料" btn_icon="ellipsis-h" :is-left="true" />
     <div class="container">
       <InfoCell :userInfo="targetUser" />
+      <div class="btn_wrapper">
+        <YButton @click="$router.push({name: 'chat',params: {user:targetUser}})">发消息</YButton>
+      </div>
     </div>
   </div>
 </template>
@@ -10,12 +13,14 @@
 <script>
 import Header from "../components/header";
 import InfoCell from "../components/info";
+import YButton from '../components/YButton'
 
 export default {
   name: "information",
   components: {
     Header,
-    InfoCell
+    InfoCell,
+    YButton
   },
   computed: {
     targetUser() {
