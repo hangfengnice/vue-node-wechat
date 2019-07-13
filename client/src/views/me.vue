@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Top from "../components/top";
+import Top from "../components/header";
 import Info from "../components/info";
 import Button from "../components/YButton";
 export default {

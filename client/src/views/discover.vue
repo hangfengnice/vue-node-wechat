@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Top from "../components/top";
+import Top from "../components/header";
 import Cell from '../components/cell'
 
 export default {

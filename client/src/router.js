@@ -5,6 +5,7 @@ import Login from "./views/login.vue";
 import Register from "./views/register.vue";
 import Moments from "./views/moments.vue";
 import Publish from "./views/publish.vue";
+import Information from './views/information.vue'
 
 Vue.use(Router);
 
@@ -59,6 +60,11 @@ const router = new Router({
       path: "/publish",
       name: "publish",
       component: Publish
+    },
+    {
+      path: "/information",
+      name: "information",
+      component: Information
     }
   ]
 });

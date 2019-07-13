@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Header from "../components/top";
+import Header from "../components/header";
 import jwt_decode from "jwt-decode";
 import CellView from "../components/cellView";
 import Scroll from "../components/scroll";

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Top from "../components/top";
+import Top from "../components/header";
 export default {
   name: "chats",
   components: {
