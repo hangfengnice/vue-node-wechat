@@ -27,6 +27,7 @@ export default {
       return this.$store.getters.targetUser;
     }
   }
+  
 };
 </script>
 

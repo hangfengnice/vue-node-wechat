@@ -2,6 +2,7 @@
   <div class="cell-wrapper" @click="$emit('click')">
     <div class="cell-title">
       <img :src="user.avatar" alt />
+      <span v-show='count' class='badge'>{{count}}</span>
       <span>{{user.name}}</span>
     </div>
   </div>
@@ -11,7 +12,8 @@
 export default {
   name: "userCell",
   props: {
-    user: Object
+    user: Object,
+    count : Number
   }
 };
 </script>
@@ -43,5 +45,20 @@ export default {
 .cell-title span {
   display: inline-block;
   vertical-align: middle;
+}
+.badge {
+  background-color: #ff0a0a;
+  border-radius: 10px;
+  color: #fff;
+  /* display: inline-block; */
+  font-size: 12px;
+  height: 18px;
+  line-height: 18px;
+  padding: 0 6px;
+  text-align: center;
+  white-space: nowrap;
+  border: 1px solid #fff;
+  position: absolute;
+  left: 2rem;
 }
 </style>

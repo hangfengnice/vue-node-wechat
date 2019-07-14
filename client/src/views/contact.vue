@@ -44,7 +44,7 @@ export default {
   methods: {
     getFriendsList() {
       this.$axios.get("/api/all").then(res => {
-        // console.log(res.data)
+        console.log(res.data)
         this.friendsList = res.data;
         this.allFriends = res.data;
       });

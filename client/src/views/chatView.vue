@@ -81,7 +81,7 @@ export default {
     },
     getMessage() {
       this.$axios(`/api/chat/msg/${this.user.id}`).then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         // console.log(res.data);
         // 过滤与当前目标对象的聊天数据
         let result = res.data.filter(data => {
@@ -120,7 +120,8 @@ export default {
   beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.targetUser = to.params.user;
-      console.log(to.params.user);
+      // console.log(to.params.user);
+
       vm.getMessage();
     });
   }
